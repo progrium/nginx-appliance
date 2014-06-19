@@ -1,0 +1,36 @@
+{
+  "include": "/etc/nginx/docker.include",
+  "user": ["nobody", "nogroup"],
+  "worker_processes": 4,
+  "pid": "/run/nginx.pid",
+  "events": {
+    "worker_connections": 768
+  },
+  "http": {
+    "include": "/etc/nginx/mime.types",
+    "access_log": "/dev/stdout",
+    "sendfile": true,
+    "tcp_nopush": true,
+    "tcp_nodelay": true,
+    "keepalive_timeout": 65,
+    "types_hash_max_size": 2048,
+    "server_names_hash_bucket_size": 64,
+    "default_type": "application/octet-stream",
+    "server": [
+      {
+        "listen": {
+          "80": ["default_server"],
+          "[::]:80": ["default_server", "ipv6only=on"]
+        },
+        "root": "/usr/share/nginx/html",
+        "index": ["index.html", "index.htm"],
+        "server_name": "localhost",
+        "location": {
+          "/": {
+            "try_files": "$uri $uri/ =404"
+          }
+        }
+      }
+    ]
+  }
+}

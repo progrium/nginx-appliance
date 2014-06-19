@@ -1,0 +1,10 @@
+{
+	"upstream": {
+		"app": {
+			"server": {
+				"www.tired.com:80": null,
+				"tired.com:80": null
+			}
+		}
+	}
+}

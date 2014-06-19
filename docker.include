@@ -1,0 +1,2 @@
+daemon off;
+error_log /dev/stdout notice;

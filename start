@@ -1,0 +1,21 @@
+#!/bin/bash
+
+export SHELL="/bin/bash"
+
+codep() {
+  set -eo monitor
+  trap 'kill $(jobs -p) &> /dev/null' EXIT
+  trap 'exit 2' CHLD
+  for child in "$@"; do
+    eval "$child &"
+  done
+  wait
+}
+
+start() {
+	nginx -v
+	codep 'nginx' \
+		'configurator -r "nginx -s reload" -c "nginx -t -c \$FILE" file:///tmp/default.json nginx-conf /etc/nginx/nginx.conf'
+}
+
+start
