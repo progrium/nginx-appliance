@@ -2,7 +2,7 @@
   "include": "/etc/nginx/docker.include",
   "user": ["nobody", "nogroup"],
   "worker_processes": 4,
-  "pid": "/run/nginx.pid",
+  "pid": "/var/run/nginx.pid",
   "events": {
     "worker_connections": 768
   },
@@ -22,7 +22,7 @@
           "80": ["default_server"],
           "[::]:80": ["default_server", "ipv6only=on"]
         },
-        "root": "/usr/share/nginx/html",
+        "root": "/usr/html",
         "index": ["index.html", "index.htm"],
         "server_name": "localhost",
         "location": {
